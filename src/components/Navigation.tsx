@@ -9,7 +9,7 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="bg-[#010409] text-white">
+    <nav className="bg-[#010409] text-white border-b border-gray-700">
       {/* Main navigation */}
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between h-14">
@@ -168,7 +168,7 @@ export default function Navigation() {
         <div className="flex space-x-4 overflow-x-auto">
           <a
             href="#"
-            className="flex items-center px-2 py-2 text-xs font-medium hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            className="flex items-center px-2 py-2 text-xs font-thin hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
           >
             <svg
               className="h-4 w-4 mr-1"
@@ -185,7 +185,7 @@ export default function Navigation() {
           </a>
           <a
             href="#"
-            className="flex items-center px-2 py-2 text-xs font-medium hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            className="flex items-center px-2 py-2 text-xs font-thin hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
           >
             <svg
               className="h-4 w-4 mr-1"
@@ -202,7 +202,7 @@ export default function Navigation() {
           </a>
           <a
             href="#"
-            className="flex items-center px-2 py-2 text-xs font-medium text-white border-b-2 border-orange-500"
+            className="flex items-center px-2 py-2 text-xs font-thin text-white border-b-2 border-orange-500"
           >
             <svg
               className="h-4 w-4 mr-1"
@@ -219,7 +219,7 @@ export default function Navigation() {
           </a>
           <a
             href="#"
-            className="flex items-center px-2 py-2 text-xs font-medium hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            className="flex items-center px-2 py-2 text-xs font-thin hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
           >
             <svg
               className="h-4 w-4 mr-1"
@@ -236,7 +236,7 @@ export default function Navigation() {
           </a>
           <a
             href="#"
-            className="flex items-center px-2 py-2 text-xs font-medium hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            className="flex items-center px-2 py-2 text-xs font-thin hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
           >
             <svg
               className="h-4 w-4 mr-1"
@@ -253,7 +253,7 @@ export default function Navigation() {
           </a>
           <a
             href="#"
-            className="flex items-center px-2 py-2 text-xs font-medium hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            className="flex items-center px-2 py-2 text-xs font-thin hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
           >
             <svg
               className="h-4 w-4 mr-1"
@@ -270,7 +270,7 @@ export default function Navigation() {
           </a>
           <a
             href="#"
-            className="flex items-center px-2 py-2 text-xs font-medium hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            className="flex items-center px-2 py-2 text-xs font-thin hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
           >
             <svg
               className="h-4 w-4 mr-1"
@@ -287,7 +287,7 @@ export default function Navigation() {
           </a>
           <a
             href="#"
-            className="flex items-center px-2 py-2 text-xs font-medium hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            className="flex items-center px-2 py-2 text-xs font-thin hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
           >
             <svg
               className="h-4 w-4 mr-1"
@@ -304,7 +304,7 @@ export default function Navigation() {
           </a>
           <a
             href="#"
-            className="flex items-center px-2 py-2 text-xs font-medium hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            className="flex items-center px-2 py-2 text-xs font-thin hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
           >
             <svg
               className="h-4 w-4 mr-1"
