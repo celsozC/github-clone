@@ -1,6 +1,13 @@
 import React from "react";
 
 export default function Navigation() {
+  // You can replace these values with your actual GitHub info
+  const githubInfo = {
+    username: "celsozC",
+    repository: "github-clone",
+    profilePicture: "https://github.com/celsozC.png", // This will automatically fetch your GitHub profile picture
+  };
+
   return (
     <nav className="bg-[#010409] text-white">
       {/* Main navigation */}
@@ -38,11 +45,11 @@ export default function Navigation() {
             {/* Username/Repository */}
             <div className="flex items-center space-x-1">
               <span className="hover:text-blue-400 text-sm cursor-pointer">
-                username
+                {githubInfo.username}
               </span>
               <span className="text-gray-500">/</span>
               <span className="hover:text-blue-400 text-sm cursor-pointer">
-                repository-name
+                {githubInfo.repository}
               </span>
             </div>
           </div>
@@ -149,8 +156,8 @@ export default function Navigation() {
             {/* Profile Picture */}
             <img
               className="h-8 w-8 rounded-full"
-              src="https://github.com/github.png"
-              alt="Profile"
+              src={githubInfo.profilePicture}
+              alt={`${githubInfo.username}'s profile`}
             />
           </div>
         </div>

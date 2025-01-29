@@ -1,25 +1,149 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
+
+interface PullRequest {
+  number: number;
+  title: string;
+  user: {
+    login: string;
+    avatar_url: string;
+  };
+  created_at: string;
+  state: string;
+  draft: boolean;
+  labels: Array<{
+    name: string;
+    color: string;
+  }>;
+}
+
+interface Filters {
+  state: "all" | "open" | "closed";
+  author: string;
+  label: string;
+  search: string;
+}
 
 export default function PullRequestPage() {
+  const [pullRequests, setPullRequests] = useState<PullRequest[]>([]);
+  const [filteredPRs, setFilteredPRs] = useState<PullRequest[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [filters, setFilters] = useState<Filters>({
+    state: "open",
+    author: "",
+    label: "",
+    search: "",
+  });
+
+  useEffect(() => {
+    fetchPullRequests();
+  }, []);
+
+  // Apply filters whenever filters or pullRequests change
+  useEffect(() => {
+    applyFilters();
+  }, [filters, pullRequests]);
+
+  const fetchPullRequests = async () => {
+    try {
+      const response = await fetch(
+        "https://api.github.com/repos/celsozC/github-clone/pulls?state=all",
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
+            Accept: "application/vnd.github.v3+json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("API Error:", errorData);
+        throw new Error(
+          `Failed to fetch pull requests: ${response.status} ${response.statusText}`
+        );
+      }
+
+      const data = await response.json();
+      setPullRequests(data);
+    } catch (err) {
+      console.error("Fetch Error:", err);
+      setError(err instanceof Error ? err.message : "An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const applyFilters = () => {
+    let filtered = [...pullRequests];
+
+    // Filter by state
+    if (filters.state !== "all") {
+      filtered = filtered.filter((pr) => pr.state === filters.state);
+    }
+
+    // Filter by author
+    if (filters.author) {
+      filtered = filtered.filter((pr) =>
+        pr.user.login.toLowerCase().includes(filters.author.toLowerCase())
+      );
+    }
+
+    // Filter by label
+    if (filters.label) {
+      filtered = filtered.filter((pr) =>
+        pr.labels.some((label) =>
+          label.name.toLowerCase().includes(filters.label.toLowerCase())
+        )
+      );
+    }
+
+    // Filter by search term
+    if (filters.search) {
+      filtered = filtered.filter(
+        (pr) =>
+          pr.title.toLowerCase().includes(filters.search.toLowerCase()) ||
+          pr.number.toString().includes(filters.search)
+      );
+    }
+
+    setFilteredPRs(filtered);
+  };
+
+  const handleStateChange = (state: "all" | "open" | "closed") => {
+    setFilters((prev) => ({ ...prev, state }));
+  };
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters((prev) => ({ ...prev, search: event.target.value }));
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return new Intl.RelativeTimeFormat("en", { numeric: "auto" }).format(
+      Math.ceil(
+        (date.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
+      ),
+      "day"
+    );
+  };
+
+  console.log("Component State:", {
+    loading,
+    error,
+    pullRequestsCount: pullRequests.length,
+  });
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-4">
+    <div className="max-w-7xl text-black mx-auto px-4 py-4">
       {/* Header Section */}
       <div className="mb-6">
         <div className="flex items-center justify-between">
           {/* Left side */}
           <div className="flex items-center space-x-4">
-            <button className="inline-flex items-center px-3 py-1 text-sm font-medium rounded-md border border-gray-300 bg-white hover:bg-gray-50">
-              <svg
-                className="h-4 w-4 mr-1.5"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
-                <path
-                  fillRule="evenodd"
-                  d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"
-                ></path>
-              </svg>
+            <button className="inline-flex items-center px-3 py-1 text-sm font-medium rounded-md border border-sm text-white border-gray-300 bg-[#262c36] hover:bg-[#3d444d]">
               Filters
               <svg
                 className="ml-1.5 h-4 w-4"
@@ -45,6 +169,8 @@ export default function PullRequestPage() {
             <input
               type="text"
               placeholder="Search all pull requests"
+              value={filters.search}
+              onChange={handleSearch}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
@@ -56,11 +182,26 @@ export default function PullRequestPage() {
         <div className="bg-gray-50 px-4 py-2 border-b border-gray-300">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <button className="inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
-                8 Open
+              <button
+                onClick={() => handleStateChange("open")}
+                className={`inline-flex items-center text-sm font-medium ${
+                  filters.state === "open"
+                    ? "text-gray-900"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                {pullRequests.filter((pr) => pr.state === "open").length} Open
               </button>
-              <button className="inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
-                12 Closed
+              <button
+                onClick={() => handleStateChange("closed")}
+                className={`inline-flex items-center text-sm font-medium ${
+                  filters.state === "closed"
+                    ? "text-gray-900"
+                    : "text-gray-600 hover:text-gray-900"
+                }`}
+              >
+                {pullRequests.filter((pr) => pr.state === "closed").length}{" "}
+                Closed
               </button>
             </div>
             <div className="flex items-center space-x-4 text-sm">
@@ -128,33 +269,115 @@ export default function PullRequestPage() {
           </div>
         </div>
 
-        {/* Empty State */}
-        <div className="p-16 text-center">
-          <svg
-            className="mx-auto h-12 w-12 text-gray-400"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={1}
-              d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            />
-          </svg>
-          <h3 className="mt-4 text-lg font-medium text-gray-900">
-            Welcome to Pull Requests
-          </h3>
-          <p className="mt-1 text-sm text-gray-500">
-            Pull requests help you collaborate on code with other people.
-          </p>
-          <div className="mt-6">
-            <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-              New pull request
-            </button>
+        {/* Pull Requests List with Debug Info */}
+        {loading ? (
+          <div className="p-4 text-center">
+            <svg
+              className="animate-spin h-5 w-5 mx-auto text-gray-500"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              ></path>
+            </svg>
+            <p className="mt-2 text-sm text-gray-500">
+              Loading pull requests...
+            </p>
           </div>
-        </div>
+        ) : error ? (
+          <div className="p-4 text-center text-red-600">
+            <p className="font-medium">Error loading pull requests</p>
+            <p className="text-sm mt-1">{error}</p>
+          </div>
+        ) : filteredPRs.length === 0 ? (
+          <div className="p-16 text-center">
+            <svg
+              className="mx-auto h-12 w-12 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1}
+                d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            <h3 className="mt-4 text-lg font-medium text-gray-900">
+              Welcome to Pull Requests
+            </h3>
+            <p className="mt-1 text-sm text-gray-500">
+              Pull requests help you collaborate on code with other people.
+            </p>
+            <div className="mt-6">
+              <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                New pull request
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="divide-y divide-gray-200">
+            {filteredPRs.map((pr) => (
+              <div key={pr.number} className="p-4 hover:bg-gray-50">
+                <div className="flex items-start">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center mb-1">
+                      <h3 className="text-base font-medium text-gray-900 hover:text-blue-600">
+                        <a
+                          className="text-white hover:text-gray-900"
+                          href={`/pulls/${pr.number}`}
+                        >
+                          {pr.title}
+                        </a>
+                      </h3>
+                      {pr.labels.map((label) => (
+                        <span
+                          key={label.name}
+                          className="ml-2 px-2 py-0.5 text-xs font-medium rounded-full"
+                          style={{
+                            backgroundColor: `#${label.color}20`,
+                            color: `#${label.color}`,
+                          }}
+                        >
+                          {label.name}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="text-sm text-gray-500">
+                      #{pr.number} opened {formatDate(pr.created_at)} by{" "}
+                      <a
+                        href={`/${pr.user.login}`}
+                        className="text-gray-900 hover:text-blue-600"
+                      >
+                        {pr.user.login}
+                      </a>
+                    </div>
+                  </div>
+                  <div className="ml-4 flex-shrink-0">
+                    <img
+                      className="h-8 w-8 rounded-full"
+                      src={pr.user.avatar_url}
+                      alt={`${pr.user.login}'s avatar`}
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Help Section */}
