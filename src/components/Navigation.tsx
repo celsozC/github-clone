@@ -11,14 +11,15 @@ export default function Navigation() {
   };
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSecondaryMenuOpen, setIsSecondaryMenuOpen] = useState(false);
 
   return (
     <nav className="bg-[#010409] text-white border-b border-gray-700">
       {/* Main navigation */}
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-14">
-          {/* Left section */}
-          <div className="flex items-center space-x-4">
+          {/* Left section - with overflow handling */}
+          <div className="flex items-center space-x-4 overflow-x-auto hide-scrollbar">
             {/* Hamburger */}
             <button
               className="p-1 border border-gray-700 rounded hover:bg-gray-800"
@@ -242,8 +243,8 @@ export default function Navigation() {
               <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
             </svg>
 
-            {/* Username/Repository */}
-            <div className="flex items-center space-x-1">
+            {/* Username/Repository - Hide on mobile */}
+            <div className="hidden sm:flex items-center space-x-1">
               <span className="hover:text-blue-400 text-sm cursor-pointer">
                 {githubInfo.username}
               </span>
@@ -254,10 +255,10 @@ export default function Navigation() {
             </div>
           </div>
 
-          {/* Right section */}
-          <div className="flex items-center space-x-4">
-            {/* Search Bar */}
-            <div className="relative">
+          {/* Right section - with overflow handling */}
+          <div className="flex items-center space-x-4 overflow-x-auto hide-scrollbar">
+            {/* Search Bar - Hide on mobile */}
+            <div className="hidden md:block relative">
               <input
                 type="text"
                 placeholder="Type / to search"
@@ -278,15 +279,8 @@ export default function Navigation() {
               </svg>
             </div>
 
-            {/* GitHub Copilot */}
-            <button className="hover:text-gray-300">
-              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-1-13v8l6-4-6-4z" />
-              </svg>
-            </button>
-
-            {/* Add Repo Icon */}
-            <button className="hover:text-gray-300">
+            {/* Mobile search icon */}
+            <button className="md:hidden text-gray-400 hover:text-gray-300">
               <svg
                 className="h-5 w-5"
                 fill="none"
@@ -297,61 +291,70 @@ export default function Navigation() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M12 4v16m8-8H4"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
             </button>
 
-            {/* Issues Icon */}
-            <button className="hover:text-gray-300">
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </button>
+            {/* Other icons - Hide less important ones on mobile */}
+            <div className="hidden sm:flex items-center space-x-4">
+              {/* Add Repository Icon */}
+              <button className="p-1 border border-gray-700 rounded-md hover:bg-gray-800">
+                <div className="flex items-center">
+                  <svg
+                    className="h-4 w-4 text-gray-400"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M7.75 2a.75.75 0 0 1 .75.75V7h4.25a.75.75 0 0 1 0 1.5H8.5v4.25a.75.75 0 0 1-1.5 0V8.5H2.75a.75.75 0 0 1 0-1.5H7V2.75A.75.75 0 0 1 7.75 2Z" />
+                  </svg>
+                  <svg
+                    className="h-3 w-3 text-gray-400 ml-0.5"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="m4.427 7.427 3.396 3.396a.25.25 0 0 0 .354 0l3.396-3.396A.25.25 0 0 0 11.396 7H4.604a.25.25 0 0 0-.177.427Z" />
+                  </svg>
+                </div>
+              </button>
 
-            {/* Pull Requests Icon */}
-            <button className="hover:text-gray-300">
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
-                />
-              </svg>
-            </button>
+              {/* Issues Icon */}
+              <button className="p-1 border border-gray-700 rounded-md hover:bg-gray-800">
+                <svg
+                  className="h-4 w-4 text-gray-400"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" />
+                  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z" />
+                </svg>
+              </button>
+            </div>
 
-            {/* Inbox Icon */}
-            <button className="hover:text-gray-300">
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                />
-              </svg>
-            </button>
+            {/* Always show these important icons */}
+            <div className="flex items-center space-x-4">
+              {/* Pull Requests Icon */}
+              <button className="p-1 border border-gray-700 rounded-md hover:bg-gray-800">
+                <svg
+                  className="h-4 w-4 text-gray-400"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z" />
+                </svg>
+              </button>
+
+              {/* Inbox Icon */}
+              <button className="p-1 border border-gray-700 rounded-md hover:bg-gray-800">
+                <svg
+                  className="h-4 w-4 text-gray-400"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M8 16a2 2 0 0 0 1.985-1.75c.017-.137-.097-.25-.235-.25h-3.5c-.138 0-.252.113-.235.25A2 2 0 0 0 8 16ZM3 5a5 5 0 0 1 10 0v2.947c0 .05.015.098.042.139l1.703 2.555A1.519 1.519 0 0 1 13.482 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947Zm5-3.5A3.5 3.5 0 0 0 4.5 5v2.947c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01l.001.006c0 .002.002.004.004.006l.006.004.007.001h10.964l.007-.001.006-.004.004-.006.001-.007a.017.017 0 0 0-.003-.01l-1.703-2.554a1.745 1.745 0 0 1-.294-.97V5A3.5 3.5 0 0 0 8 1.5Z" />
+                </svg>
+              </button>
+            </div>
 
             {/* Profile Picture */}
             <img
@@ -363,150 +366,222 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Secondary navigation */}
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex space-x-4 overflow-x-auto">
-          {/* Code nav item */}
-          <a
-            href="#"
-            className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+      {/* Secondary navigation with overflow handling */}
+      <div className="max-w-7xl mx-auto px-4 relative">
+        {/* Mobile dropdown button - only show when content overflows */}
+        <div className="flex items-center justify-between">
+          <button
+            onClick={() => setIsSecondaryMenuOpen(!isSecondaryMenuOpen)}
+            className="flex-shrink-0 md:hidden items-center space-x-2 px-2 py-1 rounded-md hover:bg-gray-800"
           >
+            <span className="text-sm">More</span>
             <svg
-              className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 16 16"
+              className={`h-4 w-4 transform transition-transform ${
+                isSecondaryMenuOpen ? "rotate-180" : ""
+              }`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <path d="M4.72 3.22a.75.75 0 011.06 1.06L2.06 8l3.72 3.72a.75.75 0 11-1.06 1.06L.47 8.53a.75.75 0 010-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z" />
-            </svg>
-            Code
-          </a>
-
-          {/* Issues nav item */}
-          <a
-            href="#"
-            className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
-          >
-            <svg
-              className="h-3.5 w-3.5 mr-1 translate-y-[1px] text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
               <path
-                fillRule="evenodd"
-                d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
               />
             </svg>
+          </button>
+
+          {/* Scrollable navigation items */}
+          <div className="flex space-x-4 overflow-x-auto hide-scrollbar">
+            {/* Code nav item */}
+            <a
+              href="#"
+              className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            >
+              <svg
+                className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M4.72 3.22a.75.75 0 011.06 1.06L2.06 8l3.72 3.72a.75.75 0 11-1.06 1.06L.47 8.53a.75.75 0 010-1.06l4.25-4.25zm6.56 0a.75.75 0 10-1.06 1.06L13.94 8l-3.72 3.72a.75.75 0 101.06 1.06l4.25-4.25a.75.75 0 000-1.06l-4.25-4.25z" />
+              </svg>
+              Code
+            </a>
+
+            {/* Issues nav item */}
+            <a
+              href="#"
+              className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            >
+              <svg
+                className="h-3.5 w-3.5 mr-1 translate-y-[1px] text-gray-400"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                <path
+                  fillRule="evenodd"
+                  d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"
+                />
+              </svg>
+              Issues
+            </a>
+
+            {/* Pull requests nav item */}
+            <a
+              href="#"
+              className="flex items-center px-2 py-2 text-xs font-light text-white border-b-2 border-orange-500"
+            >
+              <svg
+                className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1 1 0 011 1v5.628a2.251 2.251 0 101.5 0V5A2.5 2.5 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z" />
+              </svg>
+              Pull requests
+            </a>
+
+            {/* Actions nav item */}
+            <a
+              href="#"
+              className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            >
+              <svg
+                className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z" />
+                <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+              </svg>
+              Actions
+            </a>
+
+            {/* Projects nav item */}
+            <a
+              href="#"
+              className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            >
+              <svg
+                className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zM1.5 6.5v7.75c0 .138.112.25.25.25H5v-8H1.5zM5 5H1.5V1.75a.25.25 0 01.25-.25H5V5zm1.5 1.5v8h7.75a.25.25 0 00.25-.25V6.5h-8zm8-1.5h-8V1.5h7.75a.25.25 0 01.25.25V5z" />
+              </svg>
+              Projects
+            </a>
+
+            {/* Wiki nav item */}
+            <a
+              href="#"
+              className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            >
+              <svg
+                className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M0 1.75A.75.75 0 01.75 1h4.253c1.227 0 2.317.59 3 1.501A3.744 3.744 0 0111.006 1h4.245a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75h-4.507a2.25 2.25 0 00-1.591.659l-.622.621a.75.75 0 01-1.06 0l-.622-.621A2.25 2.25 0 005.258 13H.75a.75.75 0 01-.75-.75V1.75zm8.755 3a2.25 2.25 0 012.25-2.25H14.5v9h-3.757c-.71 0-1.4.201-1.992.572l.004-7.322zm-1.504 7.324l.004-5.073-.002-2.253A2.25 2.25 0 005.003 2.5H1.5v9h3.757a3.75 3.75 0 011.994.574z" />
+              </svg>
+              Wiki
+            </a>
+
+            {/* Security nav item */}
+            <a
+              href="#"
+              className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            >
+              <svg
+                className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M7.467.133a1.75 1.75 0 011.066 0l5.25 1.68A1.75 1.75 0 0115 3.48V7c0 1.566-.32 3.182-1.303 4.682-.983 1.498-2.585 2.813-5.032 3.855a1.7 1.7 0 01-1.33 0c-2.447-1.042-4.049-2.357-5.032-3.855C1.32 10.182 1 8.566 1 7V3.48a1.75 1.75 0 011.217-1.667l5.25-1.68zm.61 1.429a.25.25 0 00-.153 0l-5.25 1.68a.25.25 0 00-.174.238V7c0 1.358.275 2.666 1.057 3.86.784 1.194 2.121 2.34 4.366 3.297a.2.2 0 00.154 0c2.245-.956 3.582-2.104 4.366-3.298C13.225 9.666 13.5 8.36 13.5 7V3.48a.25.25 0 00-.174-.237l-5.25-1.68zM9 10.5a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.75a.75.75 0 10-1.5 0v3a.75.75 0 001.5 0v-3z" />
+              </svg>
+              Security
+            </a>
+
+            {/* Insights nav item */}
+            <a
+              href="#"
+              className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            >
+              <svg
+                className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M1.5 1.75a.75.75 0 00-1.5 0v12.5c0 .414.336.75.75.75h14.5a.75.75 0 000-1.5H1.5V1.75zm14.28 2.53a.75.75 0 00-1.06-1.06L10 7.94 7.53 5.47a.75.75 0 00-1.06 0L3.22 8.72a.75.75 0 001.06 1.06L7 7.06l2.47 2.47a.75.75 0 001.06 0l5.25-5.25z" />
+              </svg>
+              Insights
+            </a>
+
+            {/* Settings nav item */}
+            <a
+              href="#"
+              className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
+            >
+              <svg
+                className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M8 0a8.2 8.2 0 0 1 .701.031C9.444.095 9.99.645 10.16 1.29l.288 1.107c.018.066.079.158.212.224.231.114.454.243.668.243.123.082.233.09.299.071l1.103-.303c.644-.176 1.392.021 1.82.63.27.385.506.792.704 1.218.315.675.111 1.422-.364 1.891l-.814.806c.05-.048.098-.147.088-.294.016.257.016.515 0 .772-.01.147.038.246.088.294l.814.806c.475.469.679 1.216.364 1.891a7.977 7.977 0 0 1-.704 1.217c-.428.61-1.176.807-1.82.63l-1.102-.302c-.067-.019-.177-.011-.3.071a5.909 5.909 0 0 1-.668.386c-.133.066-.194.158-.211.224l-.29 1.106c-.168.646-.715 1.196-1.458 1.26a8.006 8.006 0 0 1-1.402 0c-.743-.064-1.289-.614-1.458-1.26l-.289-1.106c-.018-.066-.079-.158-.212-.224a5.738 5.738 0 0 1-.668-.386c-.123-.082-.233-.09-.299-.071l-1.103.303c-.644.176-1.392-.021-1.82-.63a8.12 8.12 0 0 1-.704-1.218c-.315-.675-.111-1.422.363-1.891l.815-.806c.05-.048.098-.147.088-.294a6.214 6.214 0 0 1 0-.772c.01-.147-.038-.246-.088-.294l-.815-.806C.635 6.045.431 5.298.746 4.623a7.92 7.92 0 0 1 .704-1.217c.428-.61 1.176-.807 1.82-.63l1.102.302c.067.019.177.011.3-.071.214-.143.437-.272.668-.386.133-.066.194-.158.211-.224l.29-1.106C6.009.645 6.556.095 7.299.03 7.53.01 7.764 0 8 0Zm-.571 1.525c-.036.003-.108.036-.137.146l-.289 1.105c-.147.561-.549.967-.998 1.189-.173.086-.34.183-.5.29-.417.278-.97.423-1.529.27l-1.103-.303c-.109-.03-.175.016-.195.045-.22.312-.412.644-.573.99-.014.031-.021.11.059.19l.815.806c.411.406.562.957.53 1.456a4.709 4.709 0 0 0 0 .582c.032.499-.119 1.05-.53 1.456l-.815.806c-.081.08-.073.159-.059.19.162.346.346.677.573.573.989.02.03.085.076.195.046l1.102-.303c.56-.153 1.113-.008 1.53.27.161.107.328.204.501.29.447.222.85.629.997 1.189l.289 1.105c.029.109.101.143.137.146a6.6 6.6 0 0 0 1.142 0c.036-.003.108-.036.137-.146l.289-1.105c.147-.561.549-.967.998-1.189.173-.086.34-.183.5-.29.417-.278.97-.423 1.529-.27l1.103.303c.109.029.175-.016.195-.045.22-.313.411-.644.573-.99.014-.031.021-.11-.059-.19l-.815-.806c-.411-.406-.562-.957-.53-1.456a4.709 4.709 0 0 0 0-.582c-.032-.499.119-1.05.53-1.456l.815-.806c.081-.08.073-.159.059-.19a6.464 6.464 0 0 0-.573-.989c-.02-.03-.085-.076-.195-.046l-1.102.303c-.56.153-1.113.008-1.53-.27a4.44 4.44 0 0 0-.501-.29c-.447-.222-.85-.629-.997-1.189l-.289-1.105c-.029-.11-.101-.143-.137-.146a6.6 6.6 0 0 0-1.142 0ZM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM9.5 8a1.5 1.5 0 1 0-3.001.001A1.5 1.5 0 0 0 9.5 8Z" />
+              </svg>
+              Settings
+            </a>
+          </div>
+        </div>
+
+        {/* Dropdown menu for overflow items */}
+        <div
+          className={`absolute left-0 right-0 bg-[#010409] border border-gray-700 rounded-md mt-1 py-1 z-50 ${
+            isSecondaryMenuOpen ? "block" : "hidden"
+          }`}
+        >
+          <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-800">
+            Code
+          </a>
+          <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-800">
             Issues
           </a>
-
-          {/* Pull requests nav item */}
-          <a
-            href="#"
-            className="flex items-center px-2 py-2 text-xs font-light text-white border-b-2 border-orange-500"
-          >
-            <svg
-              className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1 1 0 011 1v5.628a2.251 2.251 0 101.5 0V5A2.5 2.5 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z" />
-            </svg>
+          <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-800">
             Pull requests
           </a>
-
-          {/* Actions nav item */}
-          <a
-            href="#"
-            className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
-          >
-            <svg
-              className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z" />
-              <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
-            </svg>
+          <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-800">
             Actions
           </a>
-
-          {/* Projects nav item */}
-          <a
-            href="#"
-            className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
-          >
-            <svg
-              className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0114.25 16H1.75A1.75 1.75 0 010 14.25V1.75zM1.5 6.5v7.75c0 .138.112.25.25.25H5v-8H1.5zM5 5H1.5V1.75a.25.25 0 01.25-.25H5V5zm1.5 1.5v8h7.75a.25.25 0 00.25-.25V6.5h-8zm8-1.5h-8V1.5h7.75a.25.25 0 01.25.25V5z" />
-            </svg>
+          <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-800">
             Projects
           </a>
-
-          {/* Wiki nav item */}
-          <a
-            href="#"
-            className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
-          >
-            <svg
-              className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M0 1.75A.75.75 0 01.75 1h4.253c1.227 0 2.317.59 3 1.501A3.744 3.744 0 0111.006 1h4.245a.75.75 0 01.75.75v10.5a.75.75 0 01-.75.75h-4.507a2.25 2.25 0 00-1.591.659l-.622.621a.75.75 0 01-1.06 0l-.622-.621A2.25 2.25 0 005.258 13H.75a.75.75 0 01-.75-.75V1.75zm8.755 3a2.25 2.25 0 012.25-2.25H14.5v9h-3.757c-.71 0-1.4.201-1.992.572l.004-7.322zm-1.504 7.324l.004-5.073-.002-2.253A2.25 2.25 0 005.003 2.5H1.5v9h3.757a3.75 3.75 0 011.994.574z" />
-            </svg>
+          <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-800">
             Wiki
           </a>
-
-          {/* Security nav item */}
-          <a
-            href="#"
-            className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
-          >
-            <svg
-              className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M7.467.133a1.75 1.75 0 011.066 0l5.25 1.68A1.75 1.75 0 0115 3.48V7c0 1.566-.32 3.182-1.303 4.682-.983 1.498-2.585 2.813-5.032 3.855a1.7 1.7 0 01-1.33 0c-2.447-1.042-4.049-2.357-5.032-3.855C1.32 10.182 1 8.566 1 7V3.48a1.75 1.75 0 011.217-1.667l5.25-1.68zm.61 1.429a.25.25 0 00-.153 0l-5.25 1.68a.25.25 0 00-.174.238V7c0 1.358.275 2.666 1.057 3.86.784 1.194 2.121 2.34 4.366 3.297a.2.2 0 00.154 0c2.245-.956 3.582-2.104 4.366-3.298C13.225 9.666 13.5 8.36 13.5 7V3.48a.25.25 0 00-.174-.237l-5.25-1.68zM9 10.5a1 1 0 11-2 0 1 1 0 012 0zm-.25-5.75a.75.75 0 10-1.5 0v3a.75.75 0 001.5 0v-3z" />
-            </svg>
+          <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-800">
             Security
           </a>
-
-          {/* Insights nav item */}
-          <a
-            href="#"
-            className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
-          >
-            <svg
-              className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M1.5 1.75a.75.75 0 00-1.5 0v12.5c0 .414.336.75.75.75h14.5a.75.75 0 000-1.5H1.5V1.75zm14.28 2.53a.75.75 0 00-1.06-1.06L10 7.94 7.53 5.47a.75.75 0 00-1.06 0L3.22 8.72a.75.75 0 001.06 1.06L7 7.06l2.47 2.47a.75.75 0 001.06 0l5.25-5.25z" />
-            </svg>
+          <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-800">
             Insights
           </a>
-
-          {/* Settings nav item */}
-          <a
-            href="#"
-            className="flex items-center px-2 py-2 text-xs font-light hover:text-gray-300 border-b-2 border-transparent hover:border-gray-300"
-          >
-            <svg
-              className="h-3.5 w-3.5 mr-1 translate-y-[0.5px] text-gray-400"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path d="M8 0a8.2 8.2 0 0 1 .701.031C9.444.095 9.99.645 10.16 1.29l.288 1.107c.018.066.079.158.212.224.231.114.454.243.668.386.123.082.233.09.299.071l1.103-.303c.644-.176 1.392.021 1.82.63.27.385.506.792.704 1.218.315.675.111 1.422-.364 1.891l-.814.806c.05-.048.098-.147.088-.294.016.257.016.515 0 .772-.01.147.038.246.088.294l.814.806c.475.469.679 1.216.364 1.891a7.977 7.977 0 0 1-.704 1.217c-.428.61-1.176.807-1.82.63l-1.102-.302c-.067-.019-.177-.011-.3.071a5.909 5.909 0 0 1-.668.386c-.133.066-.194.158-.211.224l-.29 1.106c-.168.646-.715 1.196-1.458 1.26a8.006 8.006 0 0 1-1.402 0c-.743-.064-1.289-.614-1.458-1.26l-.289-1.106c-.018-.066-.079-.158-.212-.224a5.738 5.738 0 0 1-.668-.386c-.123-.082-.233-.09-.299-.071l-1.103.303c-.644.176-1.392-.021-1.82-.63a8.12 8.12 0 0 1-.704-1.218c-.315-.675-.111-1.422.363-1.891l.815-.806c.05-.048.098-.147.088-.294a6.214 6.214 0 0 1 0-.772c.01-.147-.038-.246-.088-.294l-.815-.806C.635 6.045.431 5.298.746 4.623a7.92 7.92 0 0 1 .704-1.217c.428-.61 1.176-.807 1.82-.63l1.102.302c.067.019.177.011.3-.071.214-.143.437-.272.668-.386.133-.066.194-.158.211-.224l.29-1.106C6.009.645 6.556.095 7.299.03 7.53.01 7.764 0 8 0Zm-.571 1.525c-.036.003-.108.036-.137.146l-.289 1.105c-.147.561-.549.967-.998 1.189-.173.086-.34.183-.5.29-.417.278-.97.423-1.529.27l-1.103-.303c-.109-.03-.175.016-.195.045-.22.312-.412.644-.573.99-.014.031-.021.11.059.19l.815.806c.411.406.562.957.53 1.456a4.709 4.709 0 0 0 0 .582c.032.499-.119 1.05-.53 1.456l-.815.806c-.081.08-.073.159-.059.19.162.346.353.677.573.989.02.03.085.076.195.046l1.102-.303c.56-.153 1.113-.008 1.53.27.161.107.328.204.501.29.447.222.85.629.997 1.189l.289 1.105c.029.109.101.143.137.146a6.6 6.6 0 0 0 1.142 0c.036-.003.108-.036.137-.146l.289-1.105c.147-.561.549-.967.998-1.189.173-.086.34-.183.5-.29.417-.278.97-.423 1.529-.27l1.103.303c.109.029.175-.016.195-.045.22-.313.411-.644.573-.99.014-.031.021-.11-.059-.19l-.815-.806c-.411-.406-.562-.957-.53-1.456a4.709 4.709 0 0 0 0-.582c-.032-.499.119-1.05.53-1.456l.815-.806c.081-.08.073-.159.059-.19a6.464 6.464 0 0 0-.573-.989c-.02-.03-.085-.076-.195-.046l-1.102.303c-.56.153-1.113.008-1.53-.27a4.44 4.44 0 0 0-.501-.29c-.447-.222-.85-.629-.997-1.189l-.289-1.105c-.029-.11-.101-.143-.137-.146a6.6 6.6 0 0 0-1.142 0ZM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM9.5 8a1.5 1.5 0 1 0-3.001.001A1.5 1.5 0 0 0 9.5 8Z" />
-            </svg>
+          <a href="#" className="block px-4 py-2 text-sm hover:bg-gray-800">
             Settings
           </a>
         </div>
       </div>
+
+      {/* Add styles for hiding scrollbar while maintaining functionality */}
+      <style jsx>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </nav>
   );
 }

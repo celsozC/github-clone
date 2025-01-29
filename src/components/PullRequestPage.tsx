@@ -152,74 +152,58 @@ export default function PullRequestPage() {
 
   return (
     <div className="max-w-[69rem] pt-6 text-black mx-auto px-4 py-2">
-      {/* Upper Navigation */}
-      <div className="mb-4 flex items-center space-x-2">
-        {/* Search with Filters */}
-        <div className="relative flex-1 flex">
-          {/* Filters Button with Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)}
-              className="inline-flex items-center px-2 py-[6px] text-xs font-light rounded-l-md border border-r-0 text-white border-gray-600 bg-[#262c36] hover:bg-[#404b5c]"
+      {/* Mobile Layout */}
+      <div className="md:hidden flex flex-col space-y-3">
+        {/* Row 1: Labels/Milestones and New button */}
+        <div className="flex justify-between items-center">
+          <div className="flex">
+            <a
+              href="#"
+              className="inline-flex items-center px-3 py-[6px] text-xs font-light rounded-l-md border text-white border-gray-600 bg-[#0a0f17] hover:bg-[#262c36]"
             >
-              Filters
               <svg
-                className="h-4 w-4 ml-1"
-                fill="currentColor"
+                className="mr-1 h-3.5 w-3.5 text-gray-400"
                 viewBox="0 0 16 16"
+                fill="currentColor"
               >
-                <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
+                <path d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.13.414l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z" />
               </svg>
-            </button>
-
-            {/* Filters Dropdown */}
-            {isFilterDropdownOpen && (
-              <div className="absolute left-0 mt-1 w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-                <div className="py-1">
-                  <div className="px-3 py-1.5 text-xs font-light text-gray-900 bg-gray-50 border-b border-gray-200">
-                    Filter Issues
-                  </div>
-
-                  <button
-                    className="block w-full px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-100 text-left"
-                    onClick={() => setIsFilterDropdownOpen(false)}
-                  >
-                    Open issues and pull requests
-                  </button>
-
-                  <button
-                    className="block w-full px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-100 text-left"
-                    onClick={() => setIsFilterDropdownOpen(false)}
-                  >
-                    Your issues
-                  </button>
-
-                  <button
-                    className="block w-full px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-100 text-left"
-                    onClick={() => setIsFilterDropdownOpen(false)}
-                  >
-                    Your pull requests
-                  </button>
-
-                  <button
-                    className="block w-full px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-100 text-left"
-                    onClick={() => setIsFilterDropdownOpen(false)}
-                  >
-                    Everything assigned to you
-                  </button>
-
-                  <button
-                    className="block w-full px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-100 text-left"
-                    onClick={() => setIsFilterDropdownOpen(false)}
-                  >
-                    Everything mentioning you
-                  </button>
-                </div>
-              </div>
-            )}
+              Labels
+            </a>
+            <a
+              href="#"
+              className="inline-flex items-center px-3 py-[6px] text-xs font-light rounded-r-md border text-white border-gray-600 border-l-0 bg-[#0a0f17] hover:bg-[#262c36]"
+            >
+              <svg
+                className="mr-1 h-3.5 w-3.5 text-gray-400"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+              >
+                <path d="M7.75 0a.75.75 0 01.75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 010 2.672l-2.07 1.75a1.75 1.75 0 01-1.13.414H8.5v5.25a.75.75 0 11-1.5 0V10H2.75A1.75 1.75 0 011 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 017.75 0zm0 8.5h4.384a.25.25 0 00.161-.06l2.07-1.75a.25.25 0 000-.38l-2.07-1.75a.25.25 0 00-.161-.06H2.75a.25.25 0 00-.25.25v3.5c0 .138.112.25.25.25h5z" />
+              </svg>
+              Milestones
+            </a>
           </div>
+          <button className="inline-flex items-center px-3 py-[6px] text-xs font-light rounded-md border border-transparent bg-[#29903b] text-white hover:bg-green-700">
+            New
+          </button>
+        </div>
 
-          {/* Search Input */}
+        {/* Row 2: Search with Filters */}
+        <div className="relative flex w-full">
+          <button
+            onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)}
+            className="inline-flex items-center px-3 py-[6px] text-xs font-light rounded-l-md border border-r-0 text-white border-gray-600 bg-[#262c36] hover:bg-[#404b5c]"
+          >
+            Filters
+            <svg
+              className="ml-1 h-3.5 w-3.5"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
+            </svg>
+          </button>
           <div className="relative flex-1">
             <input
               type="text"
@@ -246,334 +230,547 @@ export default function PullRequestPage() {
           </div>
         </div>
 
-        {/* Right side buttons group */}
-        <div className="flex items-center space-x-2">
-          {/* Labels and Milestones button group */}
-          <div className="flex">
-            <a
-              href="#"
-              className="inline-flex items-center px-4 py-[6px] text-xs font-light rounded-l-md border text-white border-gray-600 bg-[#0a0f17] hover:bg-[#262c36]"
-            >
-              <svg
-                className="mr-1 h-3.5 w-3.5 text-gray-400"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-              >
-                <path d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.13.414l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z" />
-              </svg>
-              Labels
-            </a>
-
-            <a
-              href="#"
-              className="inline-flex items-center px-4 py-[6px] text-xs font-light rounded-r-md border text-white border-gray-600 border-l-0 bg-[#0a0f17] hover:bg-[#262c36]"
-            >
-              <svg
-                className="mr-1 h-3.5 w-3.5 text-gray-400"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-              >
-                <path d="M7.75 0a.75.75 0 01.75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 010 2.672l-2.07 1.75a1.75 1.75 0 01-1.13.414H8.5v5.25a.75.75 0 11-1.5 0V10H2.75A1.75 1.75 0 011 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 017.75 0zm0 8.5h4.384a.25.25 0 00.161-.06l2.07-1.75a.25.25 0 000-.38l-2.07-1.75a.25.25 0 00-.161-.06H2.75a.25.25 0 00-.25.25v3.5c0 .138.112.25.25.25h5z" />
-              </svg>
-              Milestones
-            </a>
-          </div>
-
-          <button className="inline-flex items-center px-3 py-[6px] text-xs font-light rounded-md border border-transparent bg-[#29903b] text-white hover:bg-green-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-green-500">
-            New pull request
+        {/* Row 3: All/Open/Closed */}
+        <div className="flex items-center space-x-4 border-b border-gray-700 pb-2">
+          <button
+            onClick={() => handleStateChange("all")}
+            className={`inline-flex items-center text-xs font-light ${
+              filters.state === "all"
+                ? "text-gray-50"
+                : "text-gray-600 hover:text-gray-100"
+            }`}
+          >
+            {pullRequests.length} All
           </button>
+          <button
+            onClick={() => handleStateChange("open")}
+            className={`inline-flex items-center text-xs font-light ${
+              filters.state === "open"
+                ? "text-gray-50"
+                : "text-gray-600 hover:text-gray-100"
+            }`}
+          >
+            <svg
+              className="mr-1 h-3.5 w-3.5"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+            >
+              <path d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1 1 0 011 1v5.628a2.251 2.251 0 101.5 0V5A2.5 2.5 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z" />
+            </svg>
+            {pullRequests.filter((pr) => pr.state === "open").length} Open
+          </button>
+          <button
+            onClick={() => handleStateChange("closed")}
+            className={`inline-flex items-center text-xs font-light ${
+              filters.state === "closed"
+                ? "text-gray-50"
+                : "text-gray-600 hover:text-gray-100"
+            }`}
+          >
+            <svg
+              className="mr-1 h-3.5 w-3.5"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+            >
+              <path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" />
+            </svg>
+            {pullRequests.filter((pr) => pr.state === "closed").length} Closed
+          </button>
+        </div>
+
+        {/* Row 4: Filter options */}
+        <div className="flex items-center justify-between px-2 py-2 text-xs text-gray-400">
+          {["Author", "Label", "Assignee", "Sort"].map((filter) => (
+            <button
+              key={filter}
+              onClick={() =>
+                setActiveDropdown(
+                  activeDropdown === filter.toLowerCase()
+                    ? ""
+                    : filter.toLowerCase()
+                )
+              }
+              className="inline-flex items-center space-x-1 hover:text-gray-200"
+            >
+              <span>{filter}</span>
+              <svg
+                className="h-3.5 w-3.5"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
+              </svg>
+            </button>
+          ))}
+        </div>
+
+        {/* PR List for Mobile */}
+        <div className="border border-gray-700 rounded-md">
+          {filteredPRs.map((pr) => (
+            <div
+              key={pr.number}
+              className="flex items-start px-3 py-2 border-b border-gray-700 last:border-b-0 hover:bg-gray-800"
+            >
+              <div className="flex-shrink-0 pt-1">
+                <input
+                  type="checkbox"
+                  checked={selectedPRs.has(pr.number)}
+                  onChange={(e) => handleSelectPR(pr.number, e.target.checked)}
+                  className="h-4 w-4 text-blue-600 rounded bg-[#2b2a33] border border-gray-600 focus:ring-blue-500"
+                />
+              </div>
+              <div className="ml-3 flex-grow min-w-0">
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm font-medium text-gray-200 truncate">
+                    {pr.title}
+                  </span>
+                  {pr.labels.map((label) => (
+                    <span
+                      key={label.name}
+                      style={{ backgroundColor: `#${label.color}` }}
+                      className="px-2 py-0.5 text-xs rounded-full"
+                    >
+                      {label.name}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-1 text-xs text-gray-400">
+                  #{pr.number} opened {formatDate(pr.created_at)} by{" "}
+                  {pr.user.login}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Pull Requests List */}
-      <div className="border border-gray-700 rounded-md mb-4">
-        <div className="bg-[#151b23] rounded-t-md text-white px-4 py-2 font-light border-b border-gray-700">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              {/* Select All Checkbox */}
-              <div className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="h-3 w-3 text-blue-600 rounded bg-[#2b2a33] border border-gray-600 focus:ring-blue-500"
-                  checked={
-                    selectedPRs.size === filteredPRs.length &&
-                    filteredPRs.length > 0
-                  }
-                  onChange={(e) => handleSelectAll(e.target.checked)}
-                />
-              </div>
+      {/* Desktop Layout - Original Code */}
+      <div className="hidden md:block">
+        {/* Upper Navigation */}
+        <div className="mb-4 flex items-center space-x-2">
+          {/* Search with Filters */}
+          <div className="relative flex-1 flex">
+            {/* Filters Button with Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setIsFilterDropdownOpen(!isFilterDropdownOpen)}
+                className="inline-flex items-center px-2 py-[6px] text-xs font-light rounded-l-md border border-r-0 text-white border-gray-600 bg-[#262c36] hover:bg-[#404b5c]"
+              >
+                Filters
+                <svg
+                  className="h-4 w-4 ml-1"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
+                </svg>
+              </button>
 
-              <button
-                onClick={() => handleStateChange("all")}
-                className={`inline-flex items-center text-xs font-light ${
-                  filters.state === "all"
-                    ? "text-gray-50"
-                    : "text-gray-600 hover:text-gray-100"
-                }`}
-              >
-                {pullRequests.length} All
-              </button>
-              <button
-                onClick={() => handleStateChange("open")}
-                className={`inline-flex items-center text-xs font-light ${
-                  filters.state === "open"
-                    ? "text-gray-50"
-                    : "text-gray-600 hover:text-gray-100"
-                }`}
-              >
-                <svg
-                  className="mr-1 h-3.5 w-3.5"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                >
-                  <path d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1 1 0 011 1v5.628a2.251 2.251 0 101.5 0V5A2.5 2.5 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z" />
-                </svg>
-                {pullRequests.filter((pr) => pr.state === "open").length} Open
-              </button>
-              <button
-                onClick={() => handleStateChange("closed")}
-                className={`inline-flex items-center text-xs font-light ${
-                  filters.state === "closed"
-                    ? "text-gray-50"
-                    : "text-gray-600 hover:text-gray-100"
-                }`}
-              >
-                <svg
-                  className="mr-1 h-3.5 w-3.5"
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                >
-                  <path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" />
-                </svg>
-                {pullRequests.filter((pr) => pr.state === "closed").length}{" "}
-                Closed
-              </button>
+              {/* Filters Dropdown */}
+              {isFilterDropdownOpen && (
+                <div className="absolute left-0 mt-1 w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                  <div className="py-1">
+                    <div className="px-3 py-1.5 text-xs font-light text-gray-900 bg-gray-50 border-b border-gray-200">
+                      Filter Issues
+                    </div>
+
+                    <button
+                      className="block w-full px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-100 text-left"
+                      onClick={() => setIsFilterDropdownOpen(false)}
+                    >
+                      Open issues and pull requests
+                    </button>
+
+                    <button
+                      className="block w-full px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-100 text-left"
+                      onClick={() => setIsFilterDropdownOpen(false)}
+                    >
+                      Your issues
+                    </button>
+
+                    <button
+                      className="block w-full px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-100 text-left"
+                      onClick={() => setIsFilterDropdownOpen(false)}
+                    >
+                      Your pull requests
+                    </button>
+
+                    <button
+                      className="block w-full px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-100 text-left"
+                      onClick={() => setIsFilterDropdownOpen(false)}
+                    >
+                      Everything assigned to you
+                    </button>
+
+                    <button
+                      className="block w-full px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-100 text-left"
+                      onClick={() => setIsFilterDropdownOpen(false)}
+                    >
+                      Everything mentioning you
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Status Navigation with Dropdowns */}
-            <div className="flex items-center space-x-2">
-              {/* Author Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={() =>
-                    setActiveDropdown(
-                      activeDropdown === "author" ? "" : "author"
-                    )
-                  }
-                  className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
+            {/* Search Input */}
+            <div className="relative flex-1">
+              <input
+                type="text"
+                placeholder="is:pr is:open"
+                value={filters.search}
+                onChange={handleSearch}
+                className="w-full px-3 py-[6px] pl-8 border border-gray-600 rounded-r-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent bg-[#151b23] text-xs font-light"
+              />
+              <div className="absolute inset-y-0 left-2 flex items-center">
+                <svg
+                  className="h-4 w-4 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  Author
-                  <svg
-                    className="ml-1 h-3.5 w-3.5"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
-                  </svg>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* Right side buttons group */}
+          <div className="flex items-center space-x-2">
+            {/* Labels and Milestones button group */}
+            <div className="flex">
+              <a
+                href="#"
+                className="inline-flex items-center px-4 py-[6px] text-xs font-light rounded-l-md border text-white border-gray-600 bg-[#0a0f17] hover:bg-[#262c36]"
+              >
+                <svg
+                  className="mr-1 h-3.5 w-3.5 text-gray-400"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                >
+                  <path d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.13.414l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z" />
+                </svg>
+                Labels
+              </a>
+
+              <a
+                href="#"
+                className="inline-flex items-center px-4 py-[6px] text-xs font-light rounded-r-md border text-white border-gray-600 border-l-0 bg-[#0a0f17] hover:bg-[#262c36]"
+              >
+                <svg
+                  className="mr-1 h-3.5 w-3.5 text-gray-400"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                >
+                  <path d="M7.75 0a.75.75 0 01.75.75V3h3.634c.414 0 .814.147 1.13.414l2.07 1.75a1.75 1.75 0 010 2.672l-2.07 1.75a1.75 1.75 0 01-1.13.414H8.5v5.25a.75.75 0 11-1.5 0V10H2.75A1.75 1.75 0 011 8.25v-3.5C1 3.784 1.784 3 2.75 3H7V.75A.75.75 0 017.75 0zm0 8.5h4.384a.25.25 0 00.161-.06l2.07-1.75a.25.25 0 000-.38l-2.07-1.75a.25.25 0 00-.161-.06H2.75a.25.25 0 00-.25.25v3.5c0 .138.112.25.25.25h5z" />
+                </svg>
+                Milestones
+              </a>
+            </div>
+
+            <button className="inline-flex items-center px-3 py-[6px] text-xs font-light rounded-md border border-transparent bg-[#29903b] text-white hover:bg-green-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-green-500">
+              New pull request
+            </button>
+          </div>
+        </div>
+
+        {/* Pull Requests List */}
+        <div className="border border-gray-700 rounded-t-md">
+          <div className="bg-[#151b23] rounded-t-md text-white px-4 py-2 font-light border-gray-700">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-4">
+                {/* Select All Checkbox */}
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    className="h-3 w-3 text-blue-600 rounded bg-[#2b2a33] border border-gray-600 focus:ring-blue-500"
+                    checked={
+                      selectedPRs.size === filteredPRs.length &&
+                      filteredPRs.length > 0
+                    }
+                    onChange={(e) => handleSelectAll(e.target.checked)}
+                  />
+                </div>
+
+                <button
+                  onClick={() => handleStateChange("all")}
+                  className={`inline-flex items-center text-xs font-light ${
+                    filters.state === "all"
+                      ? "text-gray-50"
+                      : "text-gray-600 hover:text-gray-100"
+                  }`}
+                >
+                  {pullRequests.length} All
                 </button>
-                {activeDropdown === "author" && (
-                  <div className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-                    <div className="py-1">
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        Created by you
-                      </button>
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        @celsozC
-                      </button>
-                      <input
-                        type="text"
-                        placeholder="Filter users"
-                        className="block w-full px-4 py-2 text-xs border-t border-gray-200 focus:outline-none"
-                      />
-                    </div>
-                  </div>
-                )}
+                <button
+                  onClick={() => handleStateChange("open")}
+                  className={`inline-flex items-center text-xs font-light ${
+                    filters.state === "open"
+                      ? "text-gray-50"
+                      : "text-gray-600 hover:text-gray-100"
+                  }`}
+                >
+                  <svg
+                    className="mr-1 h-3.5 w-3.5"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                  >
+                    <path d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1 1 0 011 1v5.628a2.251 2.251 0 101.5 0V5A2.5 2.5 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z" />
+                  </svg>
+                  {pullRequests.filter((pr) => pr.state === "open").length} Open
+                </button>
+                <button
+                  onClick={() => handleStateChange("closed")}
+                  className={`inline-flex items-center text-xs font-light ${
+                    filters.state === "closed"
+                      ? "text-gray-50"
+                      : "text-gray-600 hover:text-gray-100"
+                  }`}
+                >
+                  <svg
+                    className="mr-1 h-3.5 w-3.5"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                  >
+                    <path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z" />
+                  </svg>
+                  {pullRequests.filter((pr) => pr.state === "closed").length}{" "}
+                  Closed
+                </button>
               </div>
 
-              {/* Label Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={() =>
-                    setActiveDropdown(activeDropdown === "label" ? "" : "label")
-                  }
-                  className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
-                >
-                  Label
-                  <svg
-                    className="ml-1 h-3.5 w-3.5"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
+              {/* Status Navigation with Dropdowns */}
+              <div className="flex items-center space-x-2">
+                {/* Author Dropdown */}
+                <div className="relative">
+                  <button
+                    onClick={() =>
+                      setActiveDropdown(
+                        activeDropdown === "author" ? "" : "author"
+                      )
+                    }
+                    className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
                   >
-                    <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
-                  </svg>
-                </button>
-                {activeDropdown === "label" && (
-                  <div className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-                    <div className="py-1">
-                      <input
-                        type="text"
-                        placeholder="Filter labels"
-                        className="block w-full px-4 py-2 text-xs border-b border-gray-200 focus:outline-none"
-                      />
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        bug
-                      </button>
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        enhancement
-                      </button>
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        documentation
-                      </button>
+                    Author
+                    <svg
+                      className="ml-1 h-3.5 w-3.5"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
+                    </svg>
+                  </button>
+                  {activeDropdown === "author" && (
+                    <div className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                      <div className="py-1">
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          Created by you
+                        </button>
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          @celsozC
+                        </button>
+                        <input
+                          type="text"
+                          placeholder="Filter users"
+                          className="block w-full px-4 py-2 text-xs border-t border-gray-200 focus:outline-none"
+                        />
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
 
-              {/* Projects Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={() =>
-                    setActiveDropdown(
-                      activeDropdown === "projects" ? "" : "projects"
-                    )
-                  }
-                  className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
-                >
-                  Projects
-                  <svg
-                    className="ml-1 h-3.5 w-3.5"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
+                {/* Label Dropdown */}
+                <div className="relative">
+                  <button
+                    onClick={() =>
+                      setActiveDropdown(
+                        activeDropdown === "label" ? "" : "label"
+                      )
+                    }
+                    className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
                   >
-                    <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
-                  </svg>
-                </button>
-                {activeDropdown === "projects" && (
-                  <div className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-                    <div className="py-1">
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        Project 1
-                      </button>
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        Project 2
-                      </button>
+                    Label
+                    <svg
+                      className="ml-1 h-3.5 w-3.5"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
+                    </svg>
+                  </button>
+                  {activeDropdown === "label" && (
+                    <div className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                      <div className="py-1">
+                        <input
+                          type="text"
+                          placeholder="Filter labels"
+                          className="block w-full px-4 py-2 text-xs border-b border-gray-200 focus:outline-none"
+                        />
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          bug
+                        </button>
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          enhancement
+                        </button>
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          documentation
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
 
-              {/* Milestones Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={() =>
-                    setActiveDropdown(
-                      activeDropdown === "milestones" ? "" : "milestones"
-                    )
-                  }
-                  className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
-                >
-                  Milestones
-                  <svg
-                    className="ml-1 h-3.5 w-3.5"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
+                {/* Projects Dropdown */}
+                <div className="relative">
+                  <button
+                    onClick={() =>
+                      setActiveDropdown(
+                        activeDropdown === "projects" ? "" : "projects"
+                      )
+                    }
+                    className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
                   >
-                    <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
-                  </svg>
-                </button>
-                {activeDropdown === "milestones" && (
-                  <div className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-                    <div className="py-1">
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        v1.0
-                      </button>
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        v2.0
-                      </button>
+                    Projects
+                    <svg
+                      className="ml-1 h-3.5 w-3.5"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
+                    </svg>
+                  </button>
+                  {activeDropdown === "projects" && (
+                    <div className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                      <div className="py-1">
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          Project 1
+                        </button>
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          Project 2
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
 
-              {/* Assignee Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={() =>
-                    setActiveDropdown(
-                      activeDropdown === "assignee" ? "" : "assignee"
-                    )
-                  }
-                  className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
-                >
-                  Assignee
-                  <svg
-                    className="ml-1 h-3.5 w-3.5"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
+                {/* Milestones Dropdown */}
+                <div className="relative">
+                  <button
+                    onClick={() =>
+                      setActiveDropdown(
+                        activeDropdown === "milestones" ? "" : "milestones"
+                      )
+                    }
+                    className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
                   >
-                    <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
-                  </svg>
-                </button>
-                {activeDropdown === "assignee" && (
-                  <div className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-                    <div className="py-1">
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        Assigned to you
-                      </button>
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        @celsozC
-                      </button>
-                      <input
-                        type="text"
-                        placeholder="Filter users"
-                        className="block w-full px-4 py-2 text-xs border-t border-gray-200 focus:outline-none"
-                      />
+                    Milestones
+                    <svg
+                      className="ml-1 h-3.5 w-3.5"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
+                    </svg>
+                  </button>
+                  {activeDropdown === "milestones" && (
+                    <div className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                      <div className="py-1">
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          v1.0
+                        </button>
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          v2.0
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
 
-              {/* Sort Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={() =>
-                    setActiveDropdown(activeDropdown === "sort" ? "" : "sort")
-                  }
-                  className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
-                >
-                  Sort
-                  <svg
-                    className="ml-1 h-3.5 w-3.5"
-                    fill="currentColor"
-                    viewBox="0 0 16 16"
+                {/* Assignee Dropdown */}
+                <div className="relative">
+                  <button
+                    onClick={() =>
+                      setActiveDropdown(
+                        activeDropdown === "assignee" ? "" : "assignee"
+                      )
+                    }
+                    className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
                   >
-                    <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
-                  </svg>
-                </button>
-                {activeDropdown === "sort" && (
-                  <div className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-                    <div className="py-1">
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        Newest
-                      </button>
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        Oldest
-                      </button>
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        Most commented
-                      </button>
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        Least commented
-                      </button>
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        Recently updated
-                      </button>
-                      <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
-                        Least recently updated
-                      </button>
+                    Assignee
+                    <svg
+                      className="ml-1 h-3.5 w-3.5"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
+                    </svg>
+                  </button>
+                  {activeDropdown === "assignee" && (
+                    <div className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                      <div className="py-1">
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          Assigned to you
+                        </button>
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          @celsozC
+                        </button>
+                        <input
+                          type="text"
+                          placeholder="Filter users"
+                          className="block w-full px-4 py-2 text-xs border-t border-gray-200 focus:outline-none"
+                        />
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
+
+                {/* Sort Dropdown */}
+                <div className="relative">
+                  <button
+                    onClick={() =>
+                      setActiveDropdown(activeDropdown === "sort" ? "" : "sort")
+                    }
+                    className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
+                  >
+                    Sort
+                    <svg
+                      className="ml-1 h-3.5 w-3.5"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M4.427 7.427l3.396 3.396a.25.25 0 00.354 0l3.396-3.396A.25.25 0 0011.396 7H4.604a.25.25 0 00-.177.427z" />
+                    </svg>
+                  </button>
+                  {activeDropdown === "sort" && (
+                    <div className="absolute right-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                      <div className="py-1">
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          Newest
+                        </button>
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          Oldest
+                        </button>
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          Most commented
+                        </button>
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          Least commented
+                        </button>
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          Recently updated
+                        </button>
+                        <button className="block w-full px-4 py-2 text-xs text-left text-gray-700 hover:bg-gray-100">
+                          Least recently updated
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -638,12 +835,14 @@ export default function PullRequestPage() {
             </div>
           </div>
         ) : (
-          <div className="divide-y divide-gray-700">
+          <div className="divide-y divide-gray-700 border border-gray-700 rounded-bl-md rounded-br-md">
             {filteredPRs.map((pr, index) => (
               <div
                 key={pr.number}
                 className={`p-3 bg-[#151b23] ${
-                  index === filteredPRs.length - 1 ? "rounded-b-md" : ""
+                  index === filteredPRs.length - 1
+                    ? "rounded-bl-md rounded-br-md"
+                    : ""
                 }`}
               >
                 <div className="flex items-start">
