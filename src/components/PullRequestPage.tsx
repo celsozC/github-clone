@@ -176,7 +176,7 @@ export default function PullRequestPage() {
             {isFilterDropdownOpen && (
               <div className="absolute left-0 mt-1 w-64 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
                 <div className="py-1">
-                  <div className="px-3 py-1.5 text-xs font-thin text-gray-900 bg-gray-50 border-b border-gray-200">
+                  <div className="px-3 py-1.5 text-xs font-light text-gray-900 bg-gray-50 border-b border-gray-200">
                     Filter Issues
                   </div>
 
@@ -252,7 +252,7 @@ export default function PullRequestPage() {
           <div className="flex">
             <a
               href="#"
-              className="inline-flex items-center px-4 py-[6px] text-xs font-thin rounded-l-md border text-white border-gray-600 bg-[#0a0f17] hover:bg-[#262c36]"
+              className="inline-flex items-center px-4 py-[6px] text-xs font-light rounded-l-md border text-white border-gray-600 bg-[#0a0f17] hover:bg-[#262c36]"
             >
               <svg
                 className="mr-1 h-3.5 w-3.5 text-gray-400"
@@ -266,7 +266,7 @@ export default function PullRequestPage() {
 
             <a
               href="#"
-              className="inline-flex items-center px-4 py-[6px] text-xs font-thin rounded-r-md border text-white border-gray-600 border-l-0 bg-[#0a0f17] hover:bg-[#262c36]"
+              className="inline-flex items-center px-4 py-[6px] text-xs font-light rounded-r-md border text-white border-gray-600 border-l-0 bg-[#0a0f17] hover:bg-[#262c36]"
             >
               <svg
                 className="mr-1 h-3.5 w-3.5 text-gray-400"
@@ -279,7 +279,7 @@ export default function PullRequestPage() {
             </a>
           </div>
 
-          <button className="inline-flex items-center px-3 py-[6px] text-xs font-thin rounded-md border border-transparent bg-[#29903b] text-white hover:bg-green-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-green-500">
+          <button className="inline-flex items-center px-3 py-[6px] text-xs font-light rounded-md border border-transparent bg-[#29903b] text-white hover:bg-green-700 focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-green-500">
             New pull request
           </button>
         </div>
@@ -287,7 +287,7 @@ export default function PullRequestPage() {
 
       {/* Pull Requests List */}
       <div className="border border-gray-700 rounded-md mb-4">
-        <div className="bg-[#151b23] text-white px-4 py-2 font-thin border-b border-gray-700">
+        <div className="bg-[#151b23] rounded-t-md text-white px-4 py-2 font-light border-b border-gray-700">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               {/* Select All Checkbox */}
@@ -305,7 +305,7 @@ export default function PullRequestPage() {
 
               <button
                 onClick={() => handleStateChange("all")}
-                className={`inline-flex items-center text-xs font-thin ${
+                className={`inline-flex items-center text-xs font-light ${
                   filters.state === "all"
                     ? "text-gray-50"
                     : "text-gray-600 hover:text-gray-100"
@@ -315,7 +315,7 @@ export default function PullRequestPage() {
               </button>
               <button
                 onClick={() => handleStateChange("open")}
-                className={`inline-flex items-center text-xs font-thin ${
+                className={`inline-flex items-center text-xs font-light ${
                   filters.state === "open"
                     ? "text-gray-50"
                     : "text-gray-600 hover:text-gray-100"
@@ -332,7 +332,7 @@ export default function PullRequestPage() {
               </button>
               <button
                 onClick={() => handleStateChange("closed")}
-                className={`inline-flex items-center text-xs font-thin ${
+                className={`inline-flex items-center text-xs font-light ${
                   filters.state === "closed"
                     ? "text-gray-50"
                     : "text-gray-600 hover:text-gray-100"
@@ -360,7 +360,7 @@ export default function PullRequestPage() {
                       activeDropdown === "author" ? "" : "author"
                     )
                   }
-                  className="inline-flex items-center px-2 py-[6px] text-xs font-thin text-gray-600 hover:text-gray-100"
+                  className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
                 >
                   Author
                   <svg
@@ -396,7 +396,7 @@ export default function PullRequestPage() {
                   onClick={() =>
                     setActiveDropdown(activeDropdown === "label" ? "" : "label")
                   }
-                  className="inline-flex items-center px-2 py-[6px] text-xs font-thin text-gray-600 hover:text-gray-100"
+                  className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
                 >
                   Label
                   <svg
@@ -437,7 +437,7 @@ export default function PullRequestPage() {
                       activeDropdown === "projects" ? "" : "projects"
                     )
                   }
-                  className="inline-flex items-center px-2 py-[6px] text-xs font-thin text-gray-600 hover:text-gray-100"
+                  className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
                 >
                   Projects
                   <svg
@@ -470,7 +470,7 @@ export default function PullRequestPage() {
                       activeDropdown === "milestones" ? "" : "milestones"
                     )
                   }
-                  className="inline-flex items-center px-2 py-[6px] text-xs font-thin text-gray-600 hover:text-gray-100"
+                  className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
                 >
                   Milestones
                   <svg
@@ -503,7 +503,7 @@ export default function PullRequestPage() {
                       activeDropdown === "assignee" ? "" : "assignee"
                     )
                   }
-                  className="inline-flex items-center px-2 py-[6px] text-xs font-thin text-gray-600 hover:text-gray-100"
+                  className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
                 >
                   Assignee
                   <svg
@@ -539,7 +539,7 @@ export default function PullRequestPage() {
                   onClick={() =>
                     setActiveDropdown(activeDropdown === "sort" ? "" : "sort")
                   }
-                  className="inline-flex items-center px-2 py-[6px] text-xs font-thin text-gray-600 hover:text-gray-100"
+                  className="inline-flex items-center px-2 py-[6px] text-xs font-light text-gray-600 hover:text-gray-100"
                 >
                   Sort
                   <svg
@@ -607,7 +607,7 @@ export default function PullRequestPage() {
           </div>
         ) : error ? (
           <div className="p-4 text-center text-red-600">
-            <p className="font-thin">Error loading pull requests</p>
+            <p className="font-light">Error loading pull requests</p>
             <p className="text-sm mt-1">{error}</p>
           </div>
         ) : filteredPRs.length === 0 ? (
@@ -625,22 +625,27 @@ export default function PullRequestPage() {
                 d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
               />
             </svg>
-            <h3 className="mt-4 text-lg font-thin text-gray-900">
+            <h3 className="mt-4 text-lg font-light text-gray-900">
               Welcome to Pull Requests
             </h3>
             <p className="mt-1 text-sm text-gray-500">
               Pull requests help you collaborate on code with other people.
             </p>
             <div className="mt-6">
-              <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-thin rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+              <button className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-light rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                 New pull request
               </button>
             </div>
           </div>
         ) : (
           <div className="divide-y divide-gray-700">
-            {filteredPRs.map((pr) => (
-              <div key={pr.number} className="p-3 bg-[#151b23]">
+            {filteredPRs.map((pr, index) => (
+              <div
+                key={pr.number}
+                className={`p-3 bg-[#151b23] ${
+                  index === filteredPRs.length - 1 ? "rounded-b-md" : ""
+                }`}
+              >
                 <div className="flex items-start">
                   {/* Checkbox */}
                   <div className="mr-3 mt-0.5">
@@ -680,7 +685,11 @@ export default function PullRequestPage() {
                       )}
 
                       <h3 className="text-xs font-thin text-white hover:text-blue-400">
-                        <a href={`/pulls/${pr.number}`}>
+                        <a
+                          href={`https://github.com/celsozC/github-clone/pull/${pr.number}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           {pr.state === "open" ? "Open: " : "Merged: "}
                           {pr.title}
                         </a>
@@ -688,7 +697,7 @@ export default function PullRequestPage() {
                       {pr.labels.map((label) => (
                         <span
                           key={label.name}
-                          className="ml-2 px-2 py-0.5 text-[11px] font-thin rounded-full"
+                          className="ml-2 px-2 py-0.5 text-[11px] font-light rounded-full"
                           style={{
                             backgroundColor: `#${label.color}20`,
                             color: `#${label.color}`,
